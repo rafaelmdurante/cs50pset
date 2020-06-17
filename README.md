@@ -1,6 +1,6 @@
 # Harvard-X CS50
 
-Collection of problem sets for Harvard's CS50 online course.
+Collection of problem sets for [Harvard's CS50](https://cs50.harvard.edu/x/2020/) online course.
 
 They are written in `C Language`, on `VS Code` IDE.
 
