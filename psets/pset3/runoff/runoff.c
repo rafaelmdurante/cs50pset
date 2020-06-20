@@ -4,8 +4,8 @@
 #include <math.h>
 
 // Max voters and candidates
-#define MAX_VOTERS 5
-#define MAX_CANDIDATES 3
+#define MAX_VOTERS 100
+#define MAX_CANDIDATES 9
 
 // preferences[i][j] is jth preference for voter i
 int preferences[MAX_VOTERS][MAX_CANDIDATES];
@@ -119,9 +119,7 @@ int main(int argc, string argv[])
 
         // Reset vote counts back to zero
         for (int i = 0; i < candidate_count; i++)
-        {
             candidates[i].votes = 0;
-        }
     }
     return 0;
 }
@@ -173,19 +171,22 @@ void tabulate(void)
 // Print the winner of the election, if there is one
 bool print_winner(void)
 {
-    float majority = MAX_VOTERS / 2;
-
+    // set 50% of votes
+    int majority = voter_count / 2;
+    // iterate over candidates
     for (int i = 0; i < candidate_count; i++)
     {
+        // find winner if one has more than 50% of votes
         int winner = candidates[i].votes > majority;
 
         if (winner)
         {
+            // if so, print winner's name and return true
             printf("%s\n", candidates[i].name);
             return true;
         }
     }
-    // TODO
+    // otherwise return false
     return false;
 }
 
@@ -193,44 +194,46 @@ bool print_winner(void)
 int find_min(void)
 {
     int min = 0,
-        i = 0;
-
+        i   = 0;
+    // iterate over candidates
     while (i < candidate_count)
     {
-        int lower = (min == 0 || candidates[i].votes <= min) && !candidates[i].eliminated;
+        // if min is zero it means it is either the first iteration or candidate is the least voted
+        int lower = (min == 0 || candidates[i].votes <= min) 
+                    && !candidates[i].eliminated;
 
+        // if there is a lower value, set min to the candidate's min
         if (lower)
-        {
             min = candidates[i].votes;
-        }
 
+        // increase iteration's index
         i++;
     }
-
+    // return the min value found
     return min;
 }
 
 // Return true if the election is tied between all candidates, false otherwise
 bool is_tie(int min)
 {
+    // iterate over the candidates
     for (int i = 0; i < candidate_count; i++)
-    {
+        // if there is any candidate with more then the min value
+        // it means it is not a tie and then return false
         if (candidates[i].votes > min)
-        {
             return false;
-        }
-    }
+
+    // otherwise it is a tie, then return true
     return true;
 }
 
 // Eliminate the candidate (or candidiates) in last place
 void eliminate(int min)
 {
+    // iterate over candidates
     for (int i = 0; i < candidate_count; i++)
-    {
+        // if a candidate's number of votes is equal to min
+        // eliminate this candidate
         if (candidates[i].votes == min)
-        {
             candidates[i].eliminated = true;
-        }
-    }
 }
