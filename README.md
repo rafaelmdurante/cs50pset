@@ -8,7 +8,7 @@ They are written in `C Language`, on `VS Code` IDE.
 
 The purpose of this repository is to store my solutions for personal reference only.
 
-As I learn `C` better, I might get back to these files and rewrite them.
+As I advance my studies in `C` better, I might eventually get back to these files and rewrite them.
 
 Not all problems have an executable file, nor `VS Code` tasks.
 
