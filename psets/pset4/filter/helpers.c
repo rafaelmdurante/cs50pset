@@ -41,11 +41,63 @@ void reflect(int height, int width, RGBTRIPLE image[height][width])
 // Blur image
 void blur(int height, int width, RGBTRIPLE image[height][width])
 {
-    return;
+    /**
+     * make a copy of the original image
+     * because we need the original values
+     */
+    RGBTRIPLE imgBkp[height][width];
+    for (int i = 0; i < height; i++)
+    {
+        for (int j = 0; j < width; j++)
+        {
+            imgBkp[i][j].rgbtRed   = image[i][j].rgbtRed;
+            imgBkp[i][j].rgbtGreen = image[i][j].rgbtGreen;
+            imgBkp[i][j].rgbtBlue  = image[i][j].rgbtBlue;
+        }
+    }
+    // iterate over each row of the image
+    for (int row = 0; row < height; row ++)
+    {
+        // iterate over each column of the image
+        for (int column = 0; column < width; column++)
+        {
+            // for every pixel in the image
+            // find the surrounding values
+            int up, right, down, left;
+            // the limit is the edge of the bitmap
+            up    = row == 0            ? row    : row - 1;
+            right = column == width - 1 ? column : column + 1;
+            down  = row == height - 1   ? row    : row + 1;
+            left  = column == 0         ? column : column - 1;
+            // count the number of valid surrounding pixels for each pixel
+            float surroundingPixels = 0;
+            // sum the total value of RGB
+            int tRed = 0,
+                tGreen = 0,
+                tBlue = 0;
+            // iterate over each surrouding row
+            for (int surRow = up; surRow <= down; surRow++)
+            {
+                // iterave over each surrounding column
+                for (int surCol = left; surCol <= right; surCol++)
+                {
+                    // increase the counter
+                    surroundingPixels++;
+                    // add the value to each total based on the backup image values
+                    tRed   += imgBkp[surRow][surCol].rgbtRed;
+                    tGreen += imgBkp[surRow][surCol].rgbtGreen;
+                    tBlue  += imgBkp[surRow][surCol].rgbtBlue;
+                }
+            }
+            // change the image's pixel
+            image[row][column].rgbtRed   = round((float) tRed / surroundingPixels);
+            image[row][column].rgbtGreen = round((float) tGreen / surroundingPixels);
+            image[row][column].rgbtBlue  = round((float) tBlue / surroundingPixels);
+        }
+    }
 }
 
 // Detect edges
 void edges(int height, int width, RGBTRIPLE image[height][width])
 {
-    return;
 }

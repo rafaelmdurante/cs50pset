@@ -10,9 +10,9 @@
       "request": "launch",
       "program": "${fileDirname}/filter",
       "args": [
-        "-r",
+        "-e",
         "${fileDirname}/images/tower.bmp",
-        "${fileDirname}/images/tower-reflected.bmp"
+        "${fileDirname}/images/tower-edges-test.bmp"
       ],
       "stopAtEntry": false,
       "cwd": "${workspaceFolder}",
