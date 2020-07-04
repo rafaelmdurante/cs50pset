@@ -100,4 +100,64 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
 // Detect edges
 void edges(int height, int width, RGBTRIPLE image[height][width])
 {
+    /**
+     * make a copy of the original image
+     * because we need the original values
+     */
+    RGBTRIPLE copy[height][width];
+    for (int i = 0; i < height; i++)
+        for (int j = 0; j < width; j++)
+            copy[i][j] = image[i][j];
+
+    // declare gX
+    int gX[3][3] = {{-1, 0, 1}, {-2, 0, 2}, {-1, 0, 1}};
+    // declare gY
+    int gY[3][3] = {{-1, -2, -1}, {0, 0, 0}, {1, 2, 1}};
+    // iterate over each row in the image
+    for (int row = 0; row < height; row++)
+    {
+        // iterate over each line in the image
+        for (int col = 0; col < width; col++)
+        {
+            // store the total amount for each channel according to each g matrix
+            int totGxR, totGxG, totGxB, totGyR, totGyG, totGyB;
+            totGxR = totGxG = totGxB = totGyR = totGyG = totGyB = 0;
+
+            // iterate over both matrixes to get new values
+            for (int matrixRow = -1; matrixRow <= 1; matrixRow++)
+            {
+                for (int matrixCol = -1; matrixCol <= 1; matrixCol++)
+                {
+                    // determine the table delta row and col
+                    // that is the 9 pixels surrouding the image[row][col] pixel
+                    int dr = row + matrixRow;
+                    int dc = col + matrixCol;
+                    // set all channels to value zero if pixel is not valid
+                    if (dr >= 0 && dr < height && dc >= 0 && dc < width)
+                    {
+                        // determine the gx index (in order to get the matrix weight)
+                        int gxi = matrixRow + 1;
+                        int gyi = matrixCol + 1;
+                        // calculate the gx for each channel
+                        totGxR += gX[gxi][gyi] * copy[dr][dc].rgbtRed;
+                        totGxG += gX[gxi][gyi] * copy[dr][dc].rgbtGreen;
+                        totGxB += gX[gxi][gyi] * copy[dr][dc].rgbtBlue;
+                        // calculate the gy for each channel
+                        totGyR += gY[gxi][gyi] * copy[dr][dc].rgbtRed;
+                        totGyG += gY[gxi][gyi] * copy[dr][dc].rgbtGreen;
+                        totGyB += gY[gxi][gyi] * copy[dr][dc].rgbtBlue;
+                    }
+                }
+            }
+            // save the new value for each channel
+            int newRed, newGreen, newBlue;
+            newRed   = round(sqrt(pow(totGxR, 2) + pow(totGyR, 2)));
+            newGreen = round(sqrt(pow(totGxG, 2) + pow(totGyG, 2)));
+            newBlue  = round(sqrt(pow(totGxB, 2) + pow(totGyB, 2)));
+            // make sure max value is 255 and change the original pixel value
+            image[row][col].rgbtRed   = newRed   > 255 ? 255 : newRed;
+            image[row][col].rgbtGreen = newGreen > 255 ? 255 : newGreen;
+            image[row][col].rgbtBlue  = newBlue  > 255 ? 255 : newBlue;
+        }
+    }
 }
