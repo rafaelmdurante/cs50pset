@@ -20,6 +20,7 @@ keys/         | the solutions, list of words that are mispelled
 Functions to implement:
 
 ### load()
+
 Load all the words of a dictionary into a data structure like a hash table.
 
 ```c
@@ -54,8 +55,8 @@ n->next = NULL;
   - Use `fopen`
   - Remember to check if return value is `NULL`
 - Read strings from file one at a time
-  - `fscan(file, "%s", word)`
-  - `fscan` will return `EOF` once it reaches end of file
+  - `fscanf(file, "%s", word)`
+  - `fscanf` will return `EOF` once it reaches end of file
 - Create a new node for each word
   - Use `malloc`
   - Remember to check if return value is `NULL`
@@ -67,6 +68,7 @@ n->next = NULL;
   - Be sure to set pointers in the correct order!
 
 ### hash()
+
 Takes a word as input and outputs a number corresponding to which "bucket"
 to store the word in.
 
@@ -86,17 +88,19 @@ If your function ends up with a value greater than `N`, you can take the value
 `% N` to get a value in the appropriate range.
 
 ### size()
+
 How many words in the dictionary.
 
 Keep track of the words as you load them so it is easier to get the amount
 of words.
 
 ### check()
+
 Is this word in the dictionary or not.
 
 ```c
 bool check(const char *word)
-{ 
+{
   // hash word to obtain a hash value
   // access linked list at the index in the hash table
   // traverse linked list, looking for the word by using a cursor
@@ -114,6 +118,7 @@ To traverse a linked list:
 - Keep moving cursor until you get to `NULL`, checking each node for the word.
 
 ### unload()
+
 Free up all memory of the data structure.
 
 ```c
