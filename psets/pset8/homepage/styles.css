@@ -1,0 +1,65 @@
+.masthead {
+  height: calc(100vh - 56px - 80px);
+  min-height: 500px;
+  background-image: url('https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.title {
+  margin-top: 180px;
+}
+
+.subtitle {
+  margin-top: 50px;
+  text-align: center;
+}
+
+.navbar {
+  background-color: #000;
+}
+
+.footer {
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #000;
+}
+
+  .footer > p {
+    align-self: center;
+  }
+
+/* FILMS */
+#filmList {
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  padding: 3rem 0.5rem;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+  #filmList > .card {
+    width: 18rem;
+    margin: 0.5rem;
+  }
+
+  #filmList .card-body {
+    text-align: center;
+  }
+
+/* DIRECTORS */
+.directors {  
+  margin-bottom: 3rem;
+}
+
+  .directors .subtitle {
+    margin-bottom: 2.5rem;
+  }
+
+  .directors .table {
+    margin-bottom: 2.5rem;
+  }

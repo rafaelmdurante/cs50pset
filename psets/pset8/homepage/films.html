@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+        <link href="styles.css" rel="stylesheet">
+        <title>Favourite Films</title>
+    </head>
+    <body>
+        <!-- Navigation -->
+        <nav class="navbar navbar-dark">
+            <span class="navbar-brand mb-0 h1">Cinema Archive</span>
+            <div class="navbar-expand" id="navbarNav">
+                <ul class="navbar-nav mr-2">
+                    <li class="nav-item"><a class="nav-link" href="./index.html">Home</a></li>
+                    <li class="nav-item active"><a class="nav-link" href="./films.html">Films</a></li>
+                    <li class="nav-item"><a class="nav-link" href="./directors.html">Directors</a></li>
+                    <li class="nav-item"><a class="nav-link" href="./about.html">About</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <section class="films">
+          <div class="container">
+            <h2 class="subtitle">Favourite Films</h2>
+            <ul class="films__list" id="filmList">
+              <!-- Content here via JS films.js -->
+            </ul>
+  
+          </div>
+        </section>
+
+        <footer class="footer text-light text-center">
+            <p class="align-middle">Created by Rafael Miranda Durante</p>
+        </footer>
+
+        <script src="./films.js"></script>
+    </body>
+</html>
